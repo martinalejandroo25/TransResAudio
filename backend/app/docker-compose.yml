@@ -1,0 +1,47 @@
+version: "3.9"
+services:
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: TransResAudio
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_USER: transres
+      MYSQL_PASSWORD: transres.1
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    command: ["--default-authentication-plugin=mysql_native_password"]
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: mysql+pymysql://plaud:plaudpass@db:3306/plaud
+      OLLAMA_HOST: http://ollama:11434
+      CUDA_VISIBLE_DEVICES: "0"
+    volumes:
+      - ./backend/app:/app
+      - ./data:/data
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+
+  ollama:
+    image: ollama/ollama:latest
+    volumes:
+      - ollama:/root/.ollama
+    ports:
+      - "11434:11434"
+    profiles: ["ollama"]
+
+volumes:
+  dbdata:
+  ollama:
