@@ -1,3 +1,6 @@
+# Define 3 servicios: db(MySQL), api (FastAPI) y ollama (opcional para resumenes)
+# Mapea puertos y configura volumenes persistentes
+# deploy.resources.reservations.devices asegura que el contenedor API use la GPU
 version: "3.9"
 services:
   db:

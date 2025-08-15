@@ -1,0 +1,11 @@
+<!-- AndroidManifest.xml (fragmento) -->
+<uses-permission android:name="android.permission.RECORD_AUDIO"/>
+<uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+<uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE"/>
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+<application>
+<service
+    android:name=".RecordingService"
+    android:foregroundServiceType="microphone"
+    android:exported="false"/>
+</application>

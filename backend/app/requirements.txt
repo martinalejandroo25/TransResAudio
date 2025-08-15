@@ -1,0 +1,23 @@
+# Lista las librerias Python necesarias: FastAPI, SQLAIchemy, ML para STT y diarizacion
+# onnxruntime-gpu se usara para embeddings rapidos
+fastapi==0.111.0
+uvicorn[standard]==0.30.1
+pydantic==2.7.4
+SQLAlchemy==2.0.30
+pymysql==1.1.1
+alembic==1.13.2
+python-multipart==0.0.9
+
+# Audio / ML
+numpy==1.26.4
+scipy==1.13.1
+soundfile==0.12.1
+ffmpeg-python==0.2.0
+webrtcvad==2.0.10
+openai-whisper==20231117  # fallback CPU
+faster-whisper==1.0.2
+onnxruntime-gpu==1.18.0    # para embeddings simples
+scikit-learn==1.5.0
+
+# Diarización simple (evita modelos pesados al inicio)
+# (Más adelante puedes instalar pyannote.audio)
